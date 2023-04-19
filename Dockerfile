@@ -11,9 +11,12 @@ RUN docker-php-ext-install pcntl
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 ENV WEB_DOCUMENT_ROOT /app/public
-ENV APP_ENV production
 WORKDIR /app
 COPY . .
+
+ENV APP_ENV local
+ENV APP_DEBUG true
+ENV APP_KEY "base64:wU+gGwf0J0tkfa11vrVV+gFtxSANX4Dv4UhritiHyQI="
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 # Optimizing Configuration loading
